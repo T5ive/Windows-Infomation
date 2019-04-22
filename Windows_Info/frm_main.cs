@@ -131,16 +131,16 @@ namespace TFive_Windows_Information
         #endregion Dll Import
 
         #region Options
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private  void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/T5ive/Windows-Info");
+            Process.Start("https://github.com/T5ive");
         }
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private  void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private  void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(@"Get Color Window Information" + Environment.NewLine + @"TFive - เขียนโปรแกรมยามว่าง", @"About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -236,9 +236,9 @@ namespace TFive_Windows_Information
                     PT.X = Cursor.Position.X;
                     PT.Y = Cursor.Position.Y;
                     txt_title.Clear();
-                    GetAppName.APP = null;
+                    GetAppName.App = null;
                     txt_class.Clear();
-                    GetAppName.CLASS = null;
+                    GetAppName.Class = null;
                 }
                 else
                 {
@@ -246,13 +246,14 @@ namespace TFive_Windows_Information
                     PT.Y = pt.Y;
                     ScreenToClient(mainWnd, ref PT);
                     txt_title.Text = Win32.GetWindowText(mainWnd);
-                    GetAppName.APP = txt_title.Text;
+                    GetAppName.App = txt_title.Text;
                     txt_class.Text = Win32.GetClassName(mainWnd);
-                    GetAppName.CLASS = txt_class.Text;
+                    GetAppName.Class = txt_class.Text;
 
                 }
-                getApp.AppName();
-                intPtr = GetAppName.appName;
+               // getApp.GetWindow();
+                GetAppName.GetWindow();
+                intPtr = GetAppName.AppName;
                 dataGridView1[1, 0].Value = $"{PT.X.ToString()}, {PT.Y.ToString()}";
                 dataGridView1[1, 1].Value = GetColor_.GetColorString(int.Parse(PT.X.ToString()), int.Parse(PT.Y.ToString()));
                 dataGridView1[1, 2].Value = GenerateRgba();

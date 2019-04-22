@@ -6,8 +6,8 @@ namespace TFive_Windows_Information
 {
    public class GetColor_
     {
-        public static bool ckStatus;
-        public static string ckColor = "";
+        public static bool CkStatus;
+        public static string CkColor = "";
         [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowDC(int window);
         [DllImport("gdi32.dll", SetLastError = true)] public static extern uint GetPixel(int dc, int x, int y);
         [DllImport("user32.dll", SetLastError = true)] public static extern int ReleaseDC(int window, int dc);
@@ -27,11 +27,11 @@ namespace TFive_Windows_Information
 
         public static string GetColorString(int x, int y)
         {
-            var appHandle = GetAppName.appName;
-            return HexConverterOLD(GetColorAt(appHandle.ToInt32(), x, y));
+            var appHandle = GetAppName.AppName;
+            return HexConverterOld(GetColorAt(appHandle.ToInt32(), x, y));
         }
 
-        private static string HexConverterOLD(Color c) 
+        private static string HexConverterOld(Color c) 
         {
             return $"0x{c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2")}";
         }
@@ -56,18 +56,18 @@ namespace TFive_Windows_Information
             {
                 hexStr = "0x" + hexStr;
             }
-            if (HexConverterOLD(GetColorAt(appHandle.ToInt32(), x, y)) == hexStr)
+            if (HexConverterOld(GetColorAt(appHandle.ToInt32(), x, y)) == hexStr)
             {
 
-                ckStatus = true;
-                ckColor = HexConverterOLD(GetColorAt(appHandle.ToInt32(), x, y));
+                CkStatus = true;
+                CkColor = HexConverterOld(GetColorAt(appHandle.ToInt32(), x, y));
             }
             else
             {
-                ckStatus = false;
-                ckColor = HexConverterOLD(GetColorAt(appHandle.ToInt32(), x, y));
+                CkStatus = false;
+                CkColor = HexConverterOld(GetColorAt(appHandle.ToInt32(), x, y));
             }
-            return ckStatus;
+            return CkStatus;
         }
 
     }

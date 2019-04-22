@@ -6,13 +6,13 @@ namespace TFive_Windows_Information
      public  class GetAppName
     {
         [DllImport("User32.dll")] public static extern IntPtr FindWindow(string strClassName, string strWindowName);
-        public static string APP = ""; 
-        public static string CLASS = "";
-        public static IntPtr appName;// = FindWindow(CLASS, APP);
+        public static string App = ""; 
+        public static string Class = "";
+        public static IntPtr AppName;// = FindWindow(CLASS, APP);
 
-        public void AppName()
+        public static void GetWindow()
         {
-            appName = FindWindow(CLASS, APP);
+            AppName = FindWindow(Class, App);
         }
     }
 }

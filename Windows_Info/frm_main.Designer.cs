@@ -347,10 +347,10 @@ namespace TFive_Windows_Information
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(13, 27);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(197, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(127, 13);
             this.linkLabel1.TabIndex = 25;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/T5ive/Windows-Info";
+            this.linkLabel1.Text = "https://github.com/T5ive";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // groupBox3

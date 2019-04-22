@@ -10,11 +10,10 @@ namespace TFive_Windows_Information
 {
     public class MagnifyingGlass : UserControl
     {
-        private int _PixelSize = 21;
-        private int _PixelRange = 3;
-        private bool FollowCursor = false;
-        internal MovingMagnifyingGlass _DisplayForm;
-        private bool _UseMovingGlass;
+        private int _pixelSize = 21;
+        private int _pixelRange = 3;
+        internal MovingMagnifyingGlass DisplayForm;
+        private bool _useMovingGlass;
 
         public MagnifyingGlass()
             : this(true)
@@ -36,7 +35,7 @@ namespace TFive_Windows_Information
         #region Properties
         public int PixelSize
         {
-            get => _PixelSize;
+            get => _pixelSize;
             set
             {
                 var temp = value;
@@ -50,7 +49,7 @@ namespace TFive_Windows_Information
                     // Use only integers that can't be divided by 2
                     temp++;
                 }
-                _PixelSize = temp;
+                _pixelSize = temp;
                 CalculateSize();
             }
         }
@@ -58,13 +57,13 @@ namespace TFive_Windows_Information
         {
             get
             {
-                return _UseMovingGlass;
+                return _useMovingGlass;
             }
             set
             {
                 if (MovingGlass != null)
                 {
-                    _UseMovingGlass = value;
+                    _useMovingGlass = value;
                 }
             }
         }
@@ -78,7 +77,7 @@ namespace TFive_Windows_Information
         {
             get
             {
-                return _PixelRange;
+                return _pixelRange;
             }
             set
             {
@@ -88,7 +87,7 @@ namespace TFive_Windows_Information
                     // Minimum range is one pixel
                     temp = 1;
                 }
-                _PixelRange = temp;
+                _pixelRange = temp;
                 CalculateSize();
             }
         }
@@ -185,14 +184,13 @@ namespace TFive_Windows_Information
             var screenShot = new Bitmap(shot.Width, shot.Height, PixelFormat.Format24bppRgb);
             using (var g = Graphics.FromImage(screenShot))
             {
-                var makeScreenShot = !FollowCursor;
-                if (makeScreenShot)
-                {
+                var makeScreenShot = true;
+                
                     if (MovingGlass != null)
                     {
                         makeScreenShot &= !MovingGlass.Visible;
                     }
-                }
+                
                 if (makeScreenShot)
                 {
                     g.CopyFromScreen(shot.Location, zeroPoint, shot.Size);
@@ -302,7 +300,7 @@ namespace TFive_Windows_Information
             MagnifyingGlass.BackColor = Color.Black;
             MagnifyingGlass.ForeColor = Color.White;
             MagnifyingGlass.UpdateTimer.Interval = 50;
-            MagnifyingGlass._DisplayForm = this;
+            MagnifyingGlass.DisplayForm = this;
             MagnifyingGlass.BorderStyle = BorderStyle.FixedSingle;
             MagnifyingGlass.Resize += MagnifyingGlass_Resize;
             MagnifyingGlass.Location = new Point(0, 0);
