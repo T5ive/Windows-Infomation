@@ -11,9 +11,31 @@ namespace TFive_Windows_Information
         [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowDC(int window);
         [DllImport("gdi32.dll", SetLastError = true)] public static extern uint GetPixel(int dc, int x, int y);
         [DllImport("user32.dll", SetLastError = true)] public static extern int ReleaseDC(int window, int dc);
-       
+
+        [DllImport("user32.dll", SetLastError = true)] public static extern bool GetWindowRect(IntPtr hWnd, out Rect lpRect);
+
+        public static int WinSizeWidth;
+        public static int WinSizeHeight;
         public static int PositionX;
         public static int PositionY;
+
+        public struct Rect
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+        public static Size GetControlSize(IntPtr iHandle)
+        {
+            var cSize = new Size();
+            GetWindowRect(iHandle, out var pRect);
+            cSize.Width = pRect.Right - pRect.Left;
+            cSize.Height = pRect.Bottom - pRect.Top;
+            WinSizeWidth = cSize.Width;
+            WinSizeHeight = cSize.Height;
+            return cSize;
+        }
 
         public static Color GetColorAt(int hWnd, int x, int y)
         {

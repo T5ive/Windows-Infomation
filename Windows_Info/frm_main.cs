@@ -29,6 +29,7 @@ namespace TFive_Windows_Information
             dataGridView1.Rows.Add("Color Hex", "");
             dataGridView1.Rows.Add("Color RGB", "");
             dataGridView1.Rows.Add("Result", "");
+            dataGridView1.Rows.Add("Size", "");
         }
 
         private void LoadLocation()
@@ -249,14 +250,15 @@ namespace TFive_Windows_Information
                     GetAppName.App = txt_title.Text;
                     txt_class.Text = Win32.GetClassName(mainWnd);
                     GetAppName.Class = txt_class.Text;
-
+                    dataGridView1[1, 4].Value = $"{GetColor_.GetControlSize(mainWnd).Width}, {GetColor_.GetControlSize(mainWnd).Height}";
                 }
-               // getApp.GetWindow();
+                // getApp.GetWindow();
                 GetAppName.GetWindow();
                 intPtr = GetAppName.AppName;
                 dataGridView1[1, 0].Value = $"{PT.X.ToString()}, {PT.Y.ToString()}";
                 dataGridView1[1, 1].Value = GetColor_.GetColorString(int.Parse(PT.X.ToString()), int.Parse(PT.Y.ToString()));
                 dataGridView1[1, 2].Value = GenerateRgba();
+               
                 checkX = PT.X;
                 checkY = PT.Y;
                

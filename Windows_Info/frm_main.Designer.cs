@@ -55,9 +55,6 @@ namespace TFive_Windows_Information
             this.label1 = new System.Windows.Forms.Label();
             this.panel_color = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.row_prop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.row_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -70,6 +67,9 @@ namespace TFive_Windows_Information
             this.tm_getColor = new System.Windows.Forms.Timer(this.components);
             this.tm_mouseMove = new System.Windows.Forms.Timer(this.components);
             this.tm_checkColor = new System.Windows.Forms.Timer(this.components);
+            this.row_prop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.row_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -269,9 +269,9 @@ namespace TFive_Windows_Information
             // panel_color
             // 
             this.panel_color.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
-            this.panel_color.Location = new System.Drawing.Point(3, 121);
+            this.panel_color.Location = new System.Drawing.Point(3, 129);
             this.panel_color.Name = "panel_color";
-            this.panel_color.Size = new System.Drawing.Size(271, 121);
+            this.panel_color.Size = new System.Drawing.Size(271, 115);
             this.panel_color.TabIndex = 15;
             // 
             // dataGridView1
@@ -290,7 +290,7 @@ namespace TFive_Windows_Information
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.row_prop,
             this.row_value,
-            this.Column1});
+            this.Result});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 16);
             this.dataGridView1.MultiSelect = false;
@@ -304,31 +304,6 @@ namespace TFive_Windows_Information
             this.dataGridView1.TabIndex = 14;
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
-            // 
-            // row_prop
-            // 
-            this.row_prop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.row_prop.HeaderText = "Property";
-            this.row_prop.MaxInputLength = 4;
-            this.row_prop.Name = "row_prop";
-            this.row_prop.ReadOnly = true;
-            this.row_prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.row_prop.Width = 60;
-            // 
-            // row_value
-            // 
-            this.row_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.row_value.HeaderText = "Value";
-            this.row_value.Name = "row_value";
-            this.row_value.ReadOnly = true;
-            this.row_value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.row_value.Width = 400;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -438,6 +413,31 @@ namespace TFive_Windows_Information
             this.tm_checkColor.Enabled = true;
             this.tm_checkColor.Tick += new System.EventHandler(this.tm_checkColor_Tick);
             // 
+            // row_prop
+            // 
+            this.row_prop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.row_prop.HeaderText = "Property";
+            this.row_prop.MaxInputLength = 4;
+            this.row_prop.Name = "row_prop";
+            this.row_prop.ReadOnly = true;
+            this.row_prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.row_prop.Width = 60;
+            // 
+            // row_value
+            // 
+            this.row_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.row_value.HeaderText = "Value";
+            this.row_value.Name = "row_value";
+            this.row_value.ReadOnly = true;
+            this.row_value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.row_value.Width = 400;
+            // 
+            // Result
+            // 
+            this.Result.HeaderText = "";
+            this.Result.Name = "Result";
+            this.Result.ReadOnly = true;
+            // 
             // frm_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,9 +495,6 @@ namespace TFive_Windows_Information
         private Label label2;
         private Label label3;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn row_prop;
-        private DataGridViewTextBoxColumn row_value;
-        private DataGridViewTextBoxColumn Column1;
         private Timer tm_getColor;
         private Panel panel_color;
         private ToolStripSeparator toolStripSeparator1;
@@ -514,6 +511,9 @@ namespace TFive_Windows_Information
         private Label label1;
         private LinkLabel linkLabel1;
         private Timer tm_checkColor;
+        private DataGridViewTextBoxColumn row_prop;
+        private DataGridViewTextBoxColumn row_value;
+        private DataGridViewTextBoxColumn Result;
     }
 }
 
