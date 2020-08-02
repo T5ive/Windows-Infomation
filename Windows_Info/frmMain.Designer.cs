@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace TFive_Windows_Information
 {
-    partial class frm_main
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace TFive_Windows_Information
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -55,21 +55,21 @@ namespace TFive_Windows_Information
             this.label1 = new System.Windows.Forms.Label();
             this.panel_color = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.row_prop = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.row_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.picTarget = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txt_title = new System.Windows.Forms.TextBox();
-            this.txt_class = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtClassName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tm_getColor = new System.Windows.Forms.Timer(this.components);
             this.tm_mouseMove = new System.Windows.Forms.Timer(this.components);
             this.tm_checkColor = new System.Windows.Forms.Timer(this.components);
-            this.row_prop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.row_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -94,7 +94,7 @@ namespace TFive_Windows_Information
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(162, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(160, 17);
             this.toolStripStatusLabel1.Text = "www.facebook.com/TFive.T5";
             // 
             // menuStrip1
@@ -120,7 +120,7 @@ namespace TFive_Windows_Information
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -305,6 +305,31 @@ namespace TFive_Windows_Information
             this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
+            // row_prop
+            // 
+            this.row_prop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.row_prop.HeaderText = "Property";
+            this.row_prop.MaxInputLength = 4;
+            this.row_prop.Name = "row_prop";
+            this.row_prop.ReadOnly = true;
+            this.row_prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.row_prop.Width = 60;
+            // 
+            // row_value
+            // 
+            this.row_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.row_value.HeaderText = "Value";
+            this.row_value.Name = "row_value";
+            this.row_value.ReadOnly = true;
+            this.row_value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.row_value.Width = 400;
+            // 
+            // Result
+            // 
+            this.Result.HeaderText = "";
+            this.Result.Name = "Result";
+            this.Result.ReadOnly = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.linkLabel1);
@@ -353,8 +378,8 @@ namespace TFive_Windows_Information
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txt_title);
-            this.groupBox1.Controls.Add(this.txt_class);
+            this.groupBox1.Controls.Add(this.txtTitle);
+            this.groupBox1.Controls.Add(this.txtClassName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -365,21 +390,21 @@ namespace TFive_Windows_Information
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Basic Window Info";
             // 
-            // txt_title
+            // txtTitle
             // 
-            this.txt_title.Location = new System.Drawing.Point(51, 19);
-            this.txt_title.Name = "txt_title";
-            this.txt_title.ReadOnly = true;
-            this.txt_title.Size = new System.Drawing.Size(219, 20);
-            this.txt_title.TabIndex = 1;
+            this.txtTitle.Location = new System.Drawing.Point(51, 19);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.ReadOnly = true;
+            this.txtTitle.Size = new System.Drawing.Size(219, 20);
+            this.txtTitle.TabIndex = 1;
             // 
-            // txt_class
+            // txtClassName
             // 
-            this.txt_class.Location = new System.Drawing.Point(51, 44);
-            this.txt_class.Name = "txt_class";
-            this.txt_class.ReadOnly = true;
-            this.txt_class.Size = new System.Drawing.Size(219, 20);
-            this.txt_class.TabIndex = 2;
+            this.txtClassName.Location = new System.Drawing.Point(51, 44);
+            this.txtClassName.Name = "txtClassName";
+            this.txtClassName.ReadOnly = true;
+            this.txtClassName.Size = new System.Drawing.Size(219, 20);
+            this.txtClassName.TabIndex = 2;
             // 
             // label2
             // 
@@ -413,32 +438,7 @@ namespace TFive_Windows_Information
             this.tm_checkColor.Enabled = true;
             this.tm_checkColor.Tick += new System.EventHandler(this.tm_checkColor_Tick);
             // 
-            // row_prop
-            // 
-            this.row_prop.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.row_prop.HeaderText = "Property";
-            this.row_prop.MaxInputLength = 4;
-            this.row_prop.Name = "row_prop";
-            this.row_prop.ReadOnly = true;
-            this.row_prop.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.row_prop.Width = 60;
-            // 
-            // row_value
-            // 
-            this.row_value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.row_value.HeaderText = "Value";
-            this.row_value.Name = "row_value";
-            this.row_value.ReadOnly = true;
-            this.row_value.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.row_value.Width = 400;
-            // 
-            // Result
-            // 
-            this.Result.HeaderText = "";
-            this.Result.Name = "Result";
-            this.Result.ReadOnly = true;
-            // 
-            // frm_main
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -450,7 +450,7 @@ namespace TFive_Windows_Information
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(313, 487);
-            this.Name = "frm_main";
+            this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "TFive - Windows Info";
             this.TopMost = true;
@@ -500,8 +500,8 @@ namespace TFive_Windows_Information
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem magnifyToolStripMenuItem;
-        private TextBox txt_class;
-        public TextBox txt_title;
+        private TextBox txtClassName;
+        public TextBox txtTitle;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem showColorToolStripMenuItem;
         private Timer tm_mouseMove;

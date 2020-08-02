@@ -2,7 +2,7 @@
 
 namespace TFive_Windows_Information
 {
-    partial class frm_magnify
+    partial class frmMagnify
     {
         /// <summary>
         /// Required designer variable.

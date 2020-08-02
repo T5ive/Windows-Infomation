@@ -7,13 +7,13 @@ using TFive_Windows_Information.Properties;
 
 namespace TFive_Windows_Information
 {
-    public partial class frm_main : Form
+    public partial class frmMain : Form
     {
-        public frm_main()
+        public frmMain()
         {
             InitializeComponent();
             var cv = new CursorConverter();
-            CurTarget = (Cursor)cv.ConvertFrom(Resources.curTarget);
+            _curTarget = (Cursor)cv.ConvertFrom(Resources.curTarget);
         }
 
         #region Load/Save
@@ -22,9 +22,9 @@ namespace TFive_Windows_Information
         {
             LoadLocation();
             LoadSetting();
-            bitmapFind = Resources.bmpFind;
-            bitmapFind2 = Resources.bmpFinda;
-            newCursor = CurTarget;
+            _bitmapFind = Resources.bmpFind;
+            _bitmapFind2 = Resources.bmpFinda;
+            _newCursor = _curTarget;
             dataGridView1.Rows.Add("Position", "");
             dataGridView1.Rows.Add("Color Hex", "");
             dataGridView1.Rows.Add("Color RGB", "");
@@ -34,7 +34,7 @@ namespace TFive_Windows_Information
 
         private void LoadLocation()
         {
-            if (Settings.Default.Location == new Point(0, 0))
+            if (Settings.Default.Location == new System.Drawing.Point(0, 0))
             {
                 CenterToScreen();
             }
@@ -97,11 +97,11 @@ namespace TFive_Windows_Information
 
         #region Cusor
 
-        private readonly Cursor CurTarget;
+        private readonly Cursor _curTarget;
 
-        private Bitmap bitmapFind;
-        private Bitmap bitmapFind2;
-        private Cursor newCursor;
+        private Bitmap _bitmapFind;
+        private Bitmap _bitmapFind2;
+        private Cursor _newCursor;
 
         #endregion Cusor
 
@@ -110,7 +110,7 @@ namespace TFive_Windows_Information
         private const uint GaRoot = 2;
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
+        public struct Point
         {
             public int X;
             public int Y;
@@ -127,7 +127,7 @@ namespace TFive_Windows_Information
         private static extern IntPtr GetAncestor(IntPtr hWnd, uint gaFlags);
 
         [DllImport("user32.dll")]
-        private static extern bool ScreenToClient(IntPtr hWnd, ref POINT lpPoint);
+        private static extern bool ScreenToClient(IntPtr hWnd, ref Point lpPoint);
 
         #endregion Dll Import
 
@@ -189,11 +189,11 @@ namespace TFive_Windows_Information
             UpdateSetting(1);
         }
 
-        private bool magnify = true;
+        private bool _magnifyState = true;
 
         private void magnifyToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-            magnify = magnifyToolStripMenuItem.Checked;
+            _magnifyState = magnifyToolStripMenuItem.Checked;
             UpdateSetting(2);
         }
 
@@ -203,11 +203,11 @@ namespace TFive_Windows_Information
 
         private void picTarget_MouseDown(object sender, MouseEventArgs e)
         {
-            picTarget.Image = bitmapFind2;
-            picTarget.Cursor = newCursor;
-            if (magnify)
+            picTarget.Image = _bitmapFind2;
+            picTarget.Cursor = _newCursor;
+            if (_magnifyState)
             {
-                _Magnify.Show();
+                _magnify.Show();
             }
 
             tm_getColor.Start();
@@ -219,11 +219,10 @@ namespace TFive_Windows_Information
             Get_Posix_Color();
         }
 
-        private readonly frm_magnify _Magnify = new frm_magnify();
-        readonly GetAppName getApp = new GetAppName();
-        public static IntPtr intPtr;
-        private int checkX;
-        private int checkY;
+        private readonly frmMagnify _magnify = new frmMagnify();
+        public static IntPtr IntPtr;
+        private int _checkX;
+        private int _checkY;
         private void Get_Posix_Color()
         {
             try
@@ -231,38 +230,47 @@ namespace TFive_Windows_Information
                 var pt = Cursor.Position;
                 var wnd = WindowFromPoint(pt.X, pt.Y);
                 var mainWnd = GetAncestor(wnd, GaRoot);
-                POINT PT;
+                Point point;
                 if (Mode == 0)
                 {
-                    PT.X = Cursor.Position.X;
-                    PT.Y = Cursor.Position.Y;
-                    txt_title.Clear();
-                    GetAppName.App = null;
-                    txt_class.Clear();
-                    GetAppName.Class = null;
+                    point.X = Cursor.Position.X;
+                    point.Y = Cursor.Position.Y;
+                    txtTitle.Clear();
+                    //GetAppName.App = null;
+                    TFive.App = null;
+                    txtClassName.Clear();
+                    //GetAppName.Class = null;
+                    TFive.Class = null;
                 }
                 else
                 {
-                    PT.X = pt.X;
-                    PT.Y = pt.Y;
-                    ScreenToClient(mainWnd, ref PT);
-                    txt_title.Text = Win32.GetWindowText(mainWnd);
-                    GetAppName.App = txt_title.Text;
-                    txt_class.Text = Win32.GetClassName(mainWnd);
-                    GetAppName.Class = txt_class.Text;
-                    dataGridView1[1, 4].Value = $"{GetColor_.GetControlSize(mainWnd).Width}, {GetColor_.GetControlSize(mainWnd).Height}";
+                    point.X = pt.X;
+                    point.Y = pt.Y;
+                    ScreenToClient(mainWnd, ref point);
+                    //txt_title.Text = Win32.GetWindowText(mainWnd);
+                    txtTitle.Text = TFive.GetWindowsTitle(mainWnd);
+                    //GetAppName.App = txtTitle.Text;
+                    TFive.App = txtTitle.Text;
+                    //txt_class.Text = Win32.GetClassName(mainWnd);
+                    txtClassName.Text = TFive.GetWindowsClassName(mainWnd);
+                    //GetAppName.Class = txtClassName.Text;
+                    TFive.Class = txtClassName.Text;
+                    //dataGridView1[1, 4].Value = $"{GetColor_.GetControlSize(mainWnd).Width}, {GetColor_.GetControlSize(mainWnd).Height}";
+                    dataGridView1[1, 4].Value = $"{TFive.GetControlSize(mainWnd).Width}, {TFive.GetControlSize(mainWnd).Height}";
                 }
-                // getApp.GetWindow();
-                GetAppName.GetWindow();
-                intPtr = GetAppName.AppName;
-                dataGridView1[1, 0].Value = $"{PT.X.ToString()}, {PT.Y.ToString()}";
-                dataGridView1[1, 1].Value = GetColor_.GetColorString(int.Parse(PT.X.ToString()), int.Parse(PT.Y.ToString()));
+                //GetAppName.GetWindow();
+                TFive.GetAppName();
+                //IntPtr = GetAppName.AppName;
+                IntPtr = TFive.AppName;
+                dataGridView1[1, 0].Value = $"{point.X}, {point.Y}";
+                //dataGridView1[1, 1].Value = GetColor_.GetColorString(int.Parse(point.X.ToString()), int.Parse(point.Y.ToString()));
+                dataGridView1[1, 1].Value = TFive.GetHexColor(int.Parse(point.X.ToString()), int.Parse(point.Y.ToString()));
                 dataGridView1[1, 2].Value = GenerateRgba();
                
-                checkX = PT.X;
-                checkY = PT.Y;
+                _checkX = point.X;
+                _checkY = point.Y;
                
-                panel_color.BackColor = _Magnify.magnifyingGlass1.PixelColor;
+                panel_color.BackColor = _magnify.magnifyingGlass1.PixelColor;
                 LocationMagnify();
                 
             }
@@ -274,10 +282,12 @@ namespace TFive_Windows_Information
 
         private string CheckResult(int posX, int posY)
         {
-            var color = GetColor_.StringColor(dataGridView1[1, 1].Value.ToString());
+            //var color = GetColor_.StringColor(dataGridView1[1, 1].Value.ToString());
+            var color = TFive.StringColor(dataGridView1[1, 1].Value.ToString());
             var x = posX;
             var y = posY;
-            var status = GetColor_.GetColorFast(intPtr, x, y, color, 4).ToString();
+            //var status = GetColor_.GetColorFast(IntPtr, x, y, color, 4).ToString();
+            var status = TFive.GetColor(IntPtr, x, y, color).ToString();
             return status;
         }
 
@@ -285,7 +295,7 @@ namespace TFive_Windows_Information
         {
             try
             {
-                dataGridView1[1, 3].Value = CheckResult(checkX, checkY);
+                dataGridView1[1, 3].Value = CheckResult(_checkX, _checkY);
             }
             catch
             {
@@ -310,22 +320,22 @@ namespace TFive_Windows_Information
                 locationY -= 30 + 167;
             }
 
-            _Magnify.Location = new Point(pt.X + locationX, pt.Y + locationY);
+            _magnify.Location = new System.Drawing.Point(pt.X + locationX, pt.Y + locationY);
         }
 
         public string GenerateRgba()
         {
-            int r = _Magnify.magnifyingGlass1.PixelColor.R;
-            int g = _Magnify.magnifyingGlass1.PixelColor.G;
-            int b = _Magnify.magnifyingGlass1.PixelColor.B;
+            int r = _magnify.magnifyingGlass1.PixelColor.R;
+            int g = _magnify.magnifyingGlass1.PixelColor.G;
+            int b = _magnify.magnifyingGlass1.PixelColor.B;
             return $"{r}, {g}, {b}";
         }
 
         private void picTarget_MouseUp(object sender, MouseEventArgs e)
         {
             picTarget.Cursor = Cursors.Default;
-            picTarget.Image = bitmapFind;
-            _Magnify.Hide();
+            picTarget.Image = _bitmapFind;
+            _magnify.Hide();
             tm_getColor.Stop();
             tm_mouseMove.Stop();
         }
@@ -358,7 +368,7 @@ namespace TFive_Windows_Information
 
         private new void MouseMove(int y, int x)
         {
-            Cursor.Position = new Point(Cursor.Position.X + x, Cursor.Position.Y + y);
+            Cursor.Position = new System.Drawing.Point(Cursor.Position.X + x, Cursor.Position.Y + y);
         }
 
         #endregion Control Mouse
@@ -370,7 +380,7 @@ namespace TFive_Windows_Information
             if (e.Button != MouseButtons.Right) return;
             var m = new ContextMenu();
             m.MenuItems.Add(new MenuItem("Copy"));
-            m.Show(dataGridView1, new Point(e.X, e.Y));
+            m.Show(dataGridView1, new System.Drawing.Point(e.X, e.Y));
             if (dataGridView1.GetCellCount(DataGridViewElementStates.Selected) > 0)
             {
                 CopyText();

@@ -69,31 +69,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frm_magnify.cs">
+    <Compile Include="frmMagnify.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_magnify.Designer.cs">
-      <DependentUpon>frm_magnify.cs</DependentUpon>
+    <Compile Include="frmMagnify.Designer.cs">
+      <DependentUpon>frmMagnify.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_main.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_main.Designer.cs">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="API\Get Color.cs" />
-    <Compile Include="API\GetAppName.cs" />
-    <Compile Include="magnifying.cs">
+    <Compile Include="Utility\magnifying.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="API\Win32.cs" />
-    <EmbeddedResource Include="frm_magnify.resx">
-      <DependentUpon>frm_magnify.cs</DependentUpon>
+    <Compile Include="Utility\TFive.cs" />
+    <EmbeddedResource Include="frmMagnify.resx">
+      <DependentUpon>frmMagnify.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_main.resx">
-      <DependentUpon>frm_main.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
